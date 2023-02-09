@@ -53,7 +53,10 @@ public class RedissonDistributedLockDemoTest {
             };
             executor.submit(runnable);
         }
-        Thread.currentThread().join();
+        while (executor.getActiveCount() > 0) {
+            Thread.sleep(1000);
+        }
+        System.out.println("执行完成.");
     }
 
 
